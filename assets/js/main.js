@@ -36,7 +36,7 @@ function computeAll(e) {
 	var value = localStorage[e.target.id] || "";
 	if (value.charAt(0) == "=") {
 		value = value.substring(1);
-		var re = /[A-Z][0-9]/g;
+		var re = /[A-Z][0-9][0-9]|[A-Z][0-9]/g;
 		var m;
 		var mArray = [];
 		do {
@@ -66,7 +66,10 @@ function evaluate(str, arrVar,e) {
 		}
 		else newStr += str[i];
 	}
-	e.target.value = calculate(newStr);
+	if(isNaN(newStr)){
+		e.target.value = calculate(newStr);
+	} else e.target.value =newStr;
+	localStorage[e.target.id] = e.target.value;
 }
 
 function calculate(input) {
