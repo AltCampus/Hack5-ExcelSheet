@@ -11,10 +11,12 @@ function displayCells(){
 		for (let j = 0;j<26;j++){
 			if (i==0){ cellContent += `<div class="column-headers">${String.fromCharCode(j+65)}</div>` ;continue;}
 			if (j==0){ cellContent += `<div class="row-headers">${i}</div>` ;continue;}
-			id = String.fromCharCode(j+65) + (i);
+			id = String.fromCharCode(j+65-1) + (i);
 			cellContent += `<input type="text" id="${id}"> `
 		}
 		cellContent += `</div>`
 	}
 	cellSection.innerHTML = cellContent;
 }
+
+
