@@ -101,6 +101,8 @@ h5{
 }
 
 .cell-section .column-headers {
+
+  border:1px solid #444;
   text-align:center;
   background-color: #bbb;
   border-right:1px solid #444;
@@ -170,7 +172,6 @@ body {
   margin-top:90px;
   border-bottom: 1px solid #444;
   border-top:1px solid #aaa;
- 
 }
 .icon i {
   font-size:1rem;
