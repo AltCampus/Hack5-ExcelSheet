@@ -89,17 +89,19 @@ h5{
 
 .cell-section{
   overflow-y: overlay;
+  overflow-x: overlay;
   /*display: flex;*/
+  height: 80vh;
 }
 
 .cell-section .row{
-    display: grid;
+  display: grid;
   grid-template-columns: repeat(26,80px);
 
 }
 
 .cell-section .column-headers ,.cell-section .row-headers{
-    border:1px solid #444;
+  border:1px solid #444;
   text-align:center;
   background-color: #bbb;
 }
@@ -134,13 +136,17 @@ body {
 .header-section h1 {
   font-size: 1.8rem;
   display:inline-block;
-  padding: 20px;
+  /*padding: 20px;*/
   text-transform: capitalize;
 }
 .header-section i {
   padding: 20px;
   color:#3a9e5b;
   font-size: 3rem;
+}
+
+.header-section>*{
+  vertical-align: middle;
 }
 
 /* ====icon-section==== */
@@ -152,7 +158,8 @@ body {
   grid-gap:7px;
   grid-template-columns: repeat(10,1fr);
   margin-top:90px;
-  width: 80%;
+  border-bottom: 1px solid #444;
+  border-top:1px solid #aaa;
 }
 .icon i {
   font-size:1rem;
