@@ -100,16 +100,26 @@ h5{
 
 }
 
-.cell-section .column-headers ,.cell-section .row-headers{
-    border:1px solid #444;
+.cell-section .column-headers {
   text-align:center;
   background-color: #bbb;
+  border-right:1px solid #444;
 }
 
+.cell-section .column-headers:nth-child(2) {
+  border-left:1px solid #444;
+}
+
+.cell-section .row-headers{
+  text-align:center;
+  background-color: #bbb;
+  border-bottom:1px solid #444;
+}
 
 .cell-section input{
   width:80px;
   float:left;
+  border-width: 1px;
 }
 
 .column-headers{
