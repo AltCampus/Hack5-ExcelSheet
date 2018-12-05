@@ -2,117 +2,222 @@
    v2.0 | 20110126
    License: none (public domain)
    */
- 
-   html, body, div, span, applet, object, iframe,
-   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-   a, abbr, acronym, address, big, cite, code,
-   del, dfn, em, img, ins, kbd, q, s, samp,
-   small, strike, strong, sub, sup, tt, var,
-   b, u, i, center,
-   dl, dt, dd, ol, ul, li,
-   fieldset, form, label, legend,
-   table, caption, tbody, tfoot, thead, tr, th, td,
-   article, aside, canvas, details, embed, 
-   figure, figcaption, footer, header, hgroup, 
-   menu, nav, output, ruby, section, summary,
-   time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
-  /* HTML5 display-role reset for older browsers */
-  article, aside, details, figcaption, figure, 
-  footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
-  body {
-    line-height: 1;
-  }
-  ol, ul {
-    list-style: none;
-  }
-  blockquote, q {
-    quotes: none;
-  }
-  blockquote:before, blockquote:after,
-  q:before, q:after {
-    content: '';
-    content: none;
-  }
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
 
-  /* Main CSS */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Main CSS */
 
 
 /* Header CSS*/
 
-*, *:after, *:before{
+*,
+*:after,
+*:before {
   box-sizing: border-box;
 }
 
 
 /* Common formatting */
 
-h2{
+h2 {
   font-size: 2.2em;
-  padding:20px 0;
+  padding: 20px 0;
   font-weight: 600;
-  color:white;
+  color: white;
 }
 
 
-h3{
+h3 {
   font-size: 1.8em;
-  padding:8px 0;
+  padding: 8px 0;
   font-weight: 600;
-  color:#444;
+  color: #444;
 }
 
-h4{
+h4 {
   font-size: 1.5em;
-  padding:5px 0;
+  padding: 5px 0;
 }
 
-h5{
+h5 {
   font-size: 1.2em;
-  padding:5px 0;
+  padding: 5px 0;
   /*font-weight: 300;*/
 }
 
 /* Cell section formatting */
 
-.cell-section{
+.cell-section {
   overflow-y: overlay;
+  overflow-x: overlay;
   /*display: flex;*/
+  height: 80vh;
 }
 
-.cell-section .row{
-    display: grid;
-  grid-template-columns: repeat(26,80px);
+.cell-section .row {
+  display: grid;
+  grid-template-columns: repeat(26, 80px);
 
 }
 
-.cell-section .column-headers ,.cell-section .row-headers{
-    border:1px solid #444;
-  text-align:center;
+tion .column-headers {
+
+  border: 1px solid #444;
+  text-align: center;
+
+  background-color: #bbb;
+  border-right: 1px solid #444;
 }
 
-
-.cell-section input{
-  width:80px;
-  float:left;
+.cell-section .column-headers:nth-child(2) {
+  border-left: 1px solid #444;
 }
 
-.column-headers{
-  width:80px;
+.cell-section .row-headers {
+  text-align: center;
+  background-color: #bbb;
+  border-bottom: 1px solid #444;
+}
+
+.cell-section input {
+  width: 80px;
+  float: left;
+  border-width: 1px;
+}
+
+.column-headers {
+  width: 80px;
   display: inline-block;
-  float:left;
+  float: left;
 }
 
 body {
@@ -120,67 +225,110 @@ body {
   padding-top: 1px;
   margin-top: -1px;
 }
+
 /* ===header-section=== */
 
 
-.header-section{
+.header-section {
   position: fixed;
-  z-index: 1; 
+  z-index: 1;
   width: 100%;
   line-height: 40px;
   background-color: #ffffff;
 }
+
 .header-section h1 {
   font-size: 1.8rem;
-  display:inline-block;
-  padding: 20px;
+  display: inline-block;
+  /*padding: 20px;*/
   text-transform: capitalize;
 }
+
 .header-section i {
   padding: 20px;
-  color:#3a9e5b;
+  color: #3a9e5b;
   font-size: 3rem;
+}
+
+.header-section>* {
+  vertical-align: middle;
 }
 
 /* ====icon-section==== */
 .icon {
   text-align: center;
   padding: 10px;
-  background-color:transparent;
+  background-color: transparent;
   display: grid;
-  grid-gap:7px;
-  grid-template-columns: repeat(10,1fr);
-  margin-top:90px;
- 
+  grid-gap: 7px;
+  grid-template-columns: repeat(10, 1fr);
+  margin-top: 90px;
+  border-bottom: 1px solid #444;
+  border-top: 1px solid #aaa;
 }
+
 .icon i {
-  font-size:1rem;
+  font-size: 1rem;
   color: #757982;
   padding: 0 4px;
-} 
+}
 
-.icon i:hover{
+.icon i:hover {
   background-color: #f3f3f3;
   font-size: 1.1rem;
+  color: #222;
 }
+
 /* ====option-section===== */
-.cars option{
+.cars option {
   width: 60px;
   line-height: 1.5;
 }
-option{
+
+option {
   text-transform: capitalize;
 }
+
 select {
   border: 1px solid #fff;
   background-color: transparent;
 }
+
 select:hover {
   background-color: #f3f3f3;
   cursor: pointer;
 }
 
 /* ====input-focus=== */
-input:focus { 
-  border:1.8px solid blue;
+input:focus {
+  border: 1.8px solid cornflowerblue;
+}
+
+/* =====tooltip===== */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  background-color: rgb(19, 17, 17, .6);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  text-transform: capitalize;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -170%;
+  left: 50%;
+  margin-left: -30px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
