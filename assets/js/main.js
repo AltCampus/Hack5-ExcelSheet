@@ -6,7 +6,7 @@ function displayCells(){
 	var cellContent = "";
 	var id ="";
 
-	for (let i = 0;i<20;i++){
+	for (let i = 0;i<40;i++){
 		cellContent += `<div class="row">`
 		for (let j = 0;j<26;j++){
 			if (j==0){ cellContent += `<div class="row-headers">${i}</div>` ;continue;}
