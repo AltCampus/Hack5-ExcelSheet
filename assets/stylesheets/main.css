@@ -84,3 +84,34 @@ h5{
   padding:5px 0;
   /*font-weight: 300;*/
 }
+
+
+/* Cell section formatting */
+
+.cell-section{
+  overflow-y: overlay;
+  /*display: flex;*/
+}
+
+.cell-section .row{
+    display: grid;
+  grid-template-columns: repeat(26,80px);
+
+}
+
+.cell-section .column-headers ,.cell-section .row-headers{
+    border:1px solid #444;
+  text-align:center;
+}
+
+
+.cell-section input{
+  width:80px;
+  float:left;
+}
+
+.column-headers{
+  width:80px;
+  display: inline-block;
+  float:left;
+}
