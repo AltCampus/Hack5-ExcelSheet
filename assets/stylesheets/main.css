@@ -163,6 +163,7 @@ body {
 .icon i:hover{
   background-color: #f3f3f3;
   font-size: 1.1rem;
+  color:#222;
 }
 /* ====option-section===== */
 .cars option{
@@ -183,5 +184,5 @@ select:hover {
 
 /* ====input-focus=== */
 input:focus { 
-  border:1.8px solid blue;
+  border:1.8px solid cornflowerblue;
 }
