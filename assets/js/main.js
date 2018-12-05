@@ -9,10 +9,12 @@ function displayCells() {
 	for (let i = 0; i < 20; i++) {
 		cellContent += `<div class="row">`
 		for (let j = 0; j < 26; j++) {
-			if (i == 0) { cellContent += `<div class="column-headers">${String.fromCharCode(j + 65)}</div>`; continue; }
 			if (j == 0) { cellContent += `<div class="row-headers">${i}</div>`; continue; }
-			id = String.fromCharCode(j + 65) + (i);
+			if (i == 0) { cellContent += `<div class="column-headers">${String.fromCharCode(j + 65-1)}</div>`; continue; }
+			id = String.fromCharCode(j + 65-1) + (i);
 			cellContent += `<input type="text" value='${localStorage[id] ? localStorage[id] : "" }' id="${id}"> `
+
+
 		}
 		cellContent += `</div>`
 	}

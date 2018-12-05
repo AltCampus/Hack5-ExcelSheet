@@ -101,6 +101,7 @@ h5{
 .cell-section .column-headers ,.cell-section .row-headers{
     border:1px solid #444;
   text-align:center;
+  background-color: #bbb;
 }
 
 
@@ -115,21 +116,73 @@ h5{
   float:left;
 }
 
+body {
+  overflow: auto;
+  padding-top: 1px;
+  margin-top: -1px;
+}
+/* ===header-section=== */
+
+
 .header-section{
   position: fixed;
-  z-index: 1;
+  z-index: 1; 
   width: 100%;
   line-height: 40px;
-  background-color: rgb(88, 172, 88);
+  background-color: #ffffff;
 }
 .header-section h1 {
   font-size: 1.8rem;
   display:inline-block;
   padding: 20px;
+  text-transform: capitalize;
 }
 .header-section i {
   padding: 20px;
-  color: lightblue;
-  font-size: 2rem;
+  color:#3a9e5b;
+  font-size: 3rem;
 }
 
+/* ====icon-section==== */
+.icon {
+  text-align: center;
+  padding: 10px;
+  background-color:transparent;
+  display: grid;
+  grid-gap:7px;
+  grid-template-columns: repeat(10,1fr);
+  margin-top:90px;
+ 
+}
+.icon i {
+  font-size:1rem;
+  color: #757982;
+  padding: 0 4px;
+} 
+
+.icon i:hover{
+  background-color: #f3f3f3;
+  font-size: 1.1rem;
+  color:#222;
+}
+/* ====option-section===== */
+.cars option{
+  width: 60px;
+  line-height: 1.5;
+}
+option{
+  text-transform: capitalize;
+}
+select {
+  border: 1px solid #fff;
+  background-color: transparent;
+}
+select:hover {
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+/* ====input-focus=== */
+input:focus { 
+  border:1.8px solid cornflowerblue;
+}
