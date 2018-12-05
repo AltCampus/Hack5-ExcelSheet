@@ -151,7 +151,7 @@ body {
   grid-gap:7px;
   grid-template-columns: repeat(10,1fr);
   margin-top:90px;
- 
+  width: 80%;
 }
 .icon i {
   font-size:1rem;
