@@ -101,6 +101,7 @@ h5{
 .cell-section .column-headers ,.cell-section .row-headers{
     border:1px solid #444;
   text-align:center;
+  background-color: #bbb;
 }
 
 
@@ -162,6 +163,7 @@ body {
 .icon i:hover{
   background-color: #f3f3f3;
   font-size: 1.1rem;
+  color:#222;
 }
 /* ====option-section===== */
 .cars option{
@@ -182,5 +184,5 @@ select:hover {
 
 /* ====input-focus=== */
 input:focus { 
-  border:1.8px solid blue;
+  border:1.8px solid cornflowerblue;
 }
