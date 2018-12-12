@@ -41,7 +41,8 @@ function addListner() {
         MainData[e.target.id] = {};
         MainData[e.target.id].value = '';
         MainData[e.target.id].precedence = [];
-        e.target.value = "";
+				e.target.value = "";
+				localStorage.setItem('excel',JSON.stringify(MainData));
       }
     };
     elm.onblur = function(e) {
@@ -53,7 +54,8 @@ function addListner() {
         MainData[e.target.id].formula = "";
         MainData[e.target.id].value = valueFromCell;
         reCalPresedence(e.target.id);
-      }
+			}
+			localStorage.setItem('excel', JSON.stringify(MainData));
     };
   });
 }
