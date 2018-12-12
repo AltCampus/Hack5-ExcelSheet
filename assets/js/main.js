@@ -90,9 +90,10 @@ function evaluateAndPrecedence(str, arrVar, id) {
 	if (isNaN(newStr)) {
 		value = calculate(newStr);
 	} else value = newStr;
+	window[id].value = value;
 	MainData[id].value = value;
-	displayCells();
 }
+
 function reCalPresedence(id) {
 	precArr = MainData[id].precedence;
 	precArr.forEach(preId => computeAll(preId));
