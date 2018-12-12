@@ -186,7 +186,7 @@ function calculate(input) {
 // ////////////////////////////////////////////////////////////////
 
 
-function selectCells(e) {
+function selectCells(e) { //selecting cells using drag
   var dragImgEl = document.createElement('span');
   dragImgEl.setAttribute('style',
     'position: absolute; display: block; top: 0; left: 0; width: 0; height: 0;');
@@ -195,7 +195,7 @@ function selectCells(e) {
   startCell = e.target.id;
 }
 
-function highlightCells(e) {
+function highlightCells(e) { //hilighting selected cells
   for (let i = startCell.charCodeAt(0); i <= e.target.id.charCodeAt(0); i++) {
     for (let j = Number(startCell[1]); j <= Number(e.target.id[1]); j++) {
       var cellAddress = String.fromCharCode(i) + String(j);
@@ -206,7 +206,7 @@ function highlightCells(e) {
   // console.log(e.target.id);
 }
 
-function assignSelectedValue(e) {
+function assignSelectedValue(e) { //assigning value to selected one
   var classToBeAssigned = e.target.dataset.name;
 
   var els = document.querySelectorAll(`.selected-cell`)
@@ -218,7 +218,7 @@ function assignSelectedValue(e) {
   }
 }
 
-function removeClasses(classNname) {
+function removeClasses(classNname) { //calling on on Focus classremoved which are added in highlightCells
   var els = document.querySelectorAll(`.${classNname}`)
   for (var i = 0; i < els.length; i++) {
     els[i].classList.remove(`${classNname}`)
