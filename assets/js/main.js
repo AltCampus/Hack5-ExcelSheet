@@ -1,7 +1,10 @@
 var startCell = 'A1';
-
+var MainData = {};
 displayCells();
 
+
+
+//Displaying The cells Grid
 function displayCells() {
   var cellSection = document.querySelector('.cell-section');
   var cellContent = "";
@@ -15,57 +18,70 @@ function displayCells() {
         continue;
       }
       if (i == 0) {
-        cellContent += `<div class="column-headers">${String.fromCharCode(j + 65-1)}</div>`;
+        cellContent += `<div class="column-headers">${String.fromCharCode(j + 65 - 1)}</div>`;
         continue;
       }
       id = String.fromCharCode(j + 65 - 1) + (i);
-      cellContent += `<input type="text" class="cell" draggable="true" value='${localStorage[id] ? localStorage[id] : "" }' id="${id}"> `
+      cellContent += `<input type="text" class="cell" draggable="true" value='${(MainData[id]) ? MainData[id].value : ""}' id="${id}"> `
     }
     cellContent += `</div>`
   }
   cellSection.innerHTML = cellContent;
+  addListner();
 }
 
-var DATA = {};
-var inputsNode = [].slice.call(document.querySelectorAll("input"));
-
-inputsNode.forEach(function(elm) {
-  elm.onfocus = function(e) {
-    if (document.querySelector('.active-cell')) document.querySelector('.active-cell').classList.remove('active-cell')
-    elm.classList.add('active-cell')
-    e.target.value = localStorage[e.target.id] || "";
-    removeClasses('selected-cell')
-  };
-  elm.onblur = function(e) {
-    localStorage[e.target.id] = e.target.value;
-    computeAll(e);
-  };
-});
-
-function computeAll(e) {
-  var value = localStorage[e.target.id] || "";
-  if (value.charAt(0) == "=") {
-    value = value.substring(1);
-    var re = /[A-Z][0-9][0-9]|[A-Z][0-9]/g;
-    var m;
-    var mArray = [];
-    do {
-      m = re.exec(value);
-      mArray.push(m);
-    } while (m);
-    console.log(mArray);
-    evaluate(value, mArray, e)
-  }
+function addListner() {
+  var inputsNode = [].slice.call(document.querySelectorAll("input"));
+  inputsNode.forEach(function(elm) {
+    elm.onfocus = function(e) {
+      removeClasses('selected-cell')
+      if (MainData[e.target.id]) {
+        if (MainData[e.target.id].formula !== "") {
+          e.target.value = "=" + MainData[e.target.id].formula;
+        } else e.target.value = MainData[e.target.id].value;
+      } else {
+        MainData[e.target.id] = {};
+        MainData[e.target.id].value = '';
+        MainData[e.target.id].precedence = [];
+        e.target.value = "";
+      }
+    };
+    elm.onblur = function(e) {
+      valueFromCell = e.target.value;
+      if (valueFromCell.charAt(0) == "=") {
+        MainData[e.target.id].formula = valueFromCell.substring(1);
+        computeAll(e.target.id);
+      } else {
+        MainData[e.target.id].formula = "";
+        MainData[e.target.id].value = valueFromCell;
+        reCalPresedence(e.target.id);
+      }
+    };
+  });
 }
 
-function evaluate(str, arrVar, e) {
+
+function computeAll(id) {
+  var formula = MainData[id].formula || "";
+  var re = /[A-Z][0-9][0-9]|[A-Z][0-9]/g;
+  var m;
+  var mArray = [];
+  do {
+    m = re.exec(formula);
+    mArray.push(m);
+  } while (m);
+  console.log(mArray);
+  evaluateAndPrecedence(formula, mArray, id)
+}
+
+function evaluateAndPrecedence(str, arrVar, id) {
   var newStr = ``;
-  // console.log(arrVar);
   for (i = 0; i < str.length; i++) {
     let flag = 0;
     for (j = 0; j < arrVar.length - 1; j++) {
       if (arrVar[j].index == i) {
-        newStr += `${localStorage[arrVar[j][0]]}`;
+        (MainData[arrVar[j][0]].precedence).includes(id) ? null : (MainData[arrVar[j][0]].precedence).push(id);
+        newStr += `${MainData[arrVar[j][0]].value}`;
         i += arrVar[j][0].length - 1;
         flag = 1;
         break;
@@ -75,16 +91,23 @@ function evaluate(str, arrVar, e) {
       continue;
     } else newStr += str[i];
   }
+  console.log("hello", newStr);
+
   if (isNaN(newStr)) {
-    e.target.value = calculate(newStr);
-  } else e.target.value = newStr;
-  localStorage[e.target.id] = e.target.value;
+    value = calculate(newStr);
+  } else value = newStr;
+  window[id].value = value;
+  MainData[id].value = value;
+}
+
+function reCalPresedence(id) {
+  precArr = MainData[id].precedence;
+  precArr.forEach(preId => computeAll(preId));
 }
 
 // Function equavalent of Eval
 
 function calculate(input) {
-
   var f = {
     add: '+',
     sub: '-',
@@ -201,4 +224,4 @@ function removeClasses(classNname) {
 
 document.querySelector(".cell-section").addEventListener("dragstart", selectCells);
 document.querySelector(".cell-section").addEventListener("dragenter", highlightCells);
-document.querySelector(".font-style").addEventListener('click', assignSelectedValue)
+document.querySelector(".font-style").addEventListener('click', assignSelectedValue);
