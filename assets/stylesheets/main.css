@@ -332,3 +332,25 @@ input:focus {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+/* Cell selection formatting  */
+
+.selected-cell{
+  background-color: #def;
+}
+
+.bold-text{
+  font-weight: 600;
+}
+
+.italic-text{
+  font-style: italic;
+}
+
+.strike-through-text{
+  text-decoration: line-through;
+}
+
+.underline-text{
+  text-decoration: underline;
+}
