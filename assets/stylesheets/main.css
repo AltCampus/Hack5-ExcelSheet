@@ -181,6 +181,7 @@ h5 {
   overflow-x: overlay;
   /*display: flex;*/
   height: 80vh;
+  width: 95%;
 }
 
 .cell-section .row {
@@ -189,7 +190,7 @@ h5 {
 
 }
 
-tion .column-headers {
+.column-headers {
 
   border: 1px solid #444;
   text-align: center;
@@ -265,6 +266,7 @@ body {
   margin-top: 90px;
   border-bottom: 1px solid #444;
   border-top: 1px solid #aaa;
+  width: 95%;
 }
 
 .icon i {
@@ -331,4 +333,69 @@ input:focus {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+
+/* ==== side-bar section === */
+
+
+.side-bar {
+  background-color: #f3f3f3;
+  position: fixed;
+  z-index: 2;
+  width: 25%;
+  height: 100%;
+  right: 0;
+  top: 20px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+
+/* === side-bar icons === */
+
+
+.side-bar i {
+  display: block;
+  font-size: 22px;
+}
+
+.middle-icon {
+  color: yellow;
+  margin: 40px 0;
+}
+
+.icon-clr {
+  color: blue;
+}
+
+.side-bar-icon {
+  padding-top: 40px;
+}
+
+/* ==== side-bar-img === */
+
+.side-bar img {
+  margin: 0 0 40px 0;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%
+}
+
+/* ==== footer-section === */
+
+
+.footer-icon {
+  background: #aaa;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  padding: 20px 40px;
+}
+
+.footer-icon i, .tab {
+  margin: 0 10px;
 }
