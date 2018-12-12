@@ -1,62 +1,81 @@
-
+var MainData = {};
 displayCells();
 
+
+
+//Displaying The cells Grid
 function displayCells() {
 	var cellSection = document.querySelector('.cell-section');
 	var cellContent = "";
 	var id = "";
 
-	for (let i = 0;i<40;i++){
+	for (let i = 0; i < 40; i++) {
 		cellContent += `<div class="row">`
 		for (let j = 0; j < 26; j++) {
 			if (j == 0) { cellContent += `<div class="row-headers">${i}</div>`; continue; }
-			if (i == 0) { cellContent += `<div class="column-headers">${String.fromCharCode(j + 65-1)}</div>`; continue; }
-			id = String.fromCharCode(j + 65-1) + (i);
-			cellContent += `<input type="text" value='${localStorage[id] ? localStorage[id] : "" }' id="${id}"> `
+			if (i == 0) { cellContent += `<div class="column-headers">${String.fromCharCode(j + 65 - 1)}</div>`; continue; }
+			id = String.fromCharCode(j + 65 - 1) + (i);
+			cellContent += `<input type="text" value='${(MainData[id]) ? MainData[id].value : ""}' id="${id}"> `
 		}
 		cellContent += `</div>`
 	}
 	cellSection.innerHTML = cellContent;
+	addListner();
 }
 
-var DATA = {};
-var inputsNode = [].slice.call(document.querySelectorAll("input"));
 
-inputsNode.forEach(function (elm) {
-	elm.onfocus = function (e) {
-		e.target.value = localStorage[e.target.id] || "";
-	};
-	elm.onblur = function (e) {
-		localStorage[e.target.id] = e.target.value;
-		computeAll(e);
-	};
-});
-
-function computeAll(e) {
-	var value = localStorage[e.target.id] || "";
-	if (value.charAt(0) == "=") {
-		value = value.substring(1);
-		var re = /[A-Z][0-9][0-9]|[A-Z][0-9]/g;
-		var m;
-		var mArray = [];
-		do {
-			m = re.exec(value);
-			mArray.push(m);
-		} while (m);
-		console.log(mArray);
-		evaluate(value, mArray,e)
-	}
+function addListner() {
+	var inputsNode = [].slice.call(document.querySelectorAll("input"));
+	inputsNode.forEach(function (elm) {
+		elm.onfocus = function (e) {
+			if (MainData[e.target.id]) {
+				if (MainData[e.target.id].formula !== "") {
+					e.target.value = "=" + MainData[e.target.id].formula;
+				} else e.target.value = MainData[e.target.id].value;
+			} else {
+				MainData[e.target.id] = {};
+				MainData[e.target.id].value = '';
+				MainData[e.target.id].precedence = [];
+				e.target.value = "";
+			}
+		};
+		elm.onblur = function (e) {
+			valueFromCell = e.target.value;
+			if (valueFromCell.charAt(0) == "=") {
+				MainData[e.target.id].formula = valueFromCell.substring(1);
+				computeAll(e.target.id);
+			} else {
+				MainData[e.target.id].formula = "";
+				MainData[e.target.id].value = valueFromCell;
+				reCalPresedence(e.target.id);
+			}
+		};
+	});
 }
 
-function evaluate(str, arrVar,e) {
+
+function computeAll(id) {
+	var formula = MainData[id].formula || "";
+	var re = /[A-Z][0-9][0-9]|[A-Z][0-9]/g;
+	var m;
+	var mArray = [];
+	do {
+		m = re.exec(formula);
+		mArray.push(m);
+	} while (m);
+	console.log(mArray);
+	evaluateAndPrecedence(formula, mArray, id)
+}
+
+function evaluateAndPrecedence(str, arrVar, id) {
 	var newStr = ``;
-	// console.log(arrVar);
 	for (i = 0; i < str.length; i++) {
 		let flag = 0;
 		for (j = 0; j < arrVar.length - 1; j++) {
 			if (arrVar[j].index == i) {
-				newStr += `${localStorage[arrVar[j][0]]}`;
-				i += arrVar[j][0].length-1;
+				(MainData[arrVar[j][0]].precedence).includes(id) ? null : (MainData[arrVar[j][0]].precedence).push(id);
+				newStr += `${MainData[arrVar[j][0]].value}`;
+				i += arrVar[j][0].length - 1;
 				flag = 1;
 				break;
 			}
@@ -66,10 +85,17 @@ function evaluate(str, arrVar,e) {
 		}
 		else newStr += str[i];
 	}
-	if(isNaN(newStr)){
-		e.target.value = calculate(newStr);
-	} else e.target.value =newStr;
-	localStorage[e.target.id] = e.target.value;
+	console.log("hello",newStr);
+	
+	if (isNaN(newStr)) {
+		value = calculate(newStr);
+	} else value = newStr;
+	MainData[id].value = value;
+	displayCells();
+}
+function reCalPresedence(id) {
+	precArr = MainData[id].precedence;
+	precArr.forEach(preId => computeAll(preId));
 }
 
 function calculate(input) {
@@ -102,7 +128,7 @@ function calculate(input) {
 	for (var i = 0, n = f.ooo.length; i < n; i++) {
 
 		var re = new RegExp('(\\d+\\.?\\d*)([\\' + f.ooo[i].join('\\') + '])(\\d+\\.?\\d*)');
-		re.lastIndex = 0; 
+		re.lastIndex = 0;
 
 		while (re.test(input)) {
 			output = _calculate(RegExp.$1, RegExp.$2, RegExp.$3);
@@ -141,3 +167,4 @@ function calculate(input) {
 		}
 	}
 }
+
