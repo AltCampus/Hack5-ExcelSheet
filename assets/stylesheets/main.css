@@ -346,7 +346,7 @@ input:focus {
   width: 25%;
   height: 100%;
   right: 0;
-  top: 20px;
+  top: 0;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 4fr;
@@ -372,6 +372,11 @@ input:focus {
 
 .side-bar-icon {
   padding-top: 40px;
+  box-shadow: 0 0 4px 5px #dadada;
+}
+
+.side-bar-text-box {
+
 }
 
 /* ==== side-bar-img === */
@@ -387,21 +392,39 @@ input:focus {
 
 
 .footer-icon {
-  background: #aaa;
+  position: relative;
+  background: #f3f3f3;
   width: 100%;
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 1;
-  padding: 20px 40px;
+  padding: 20px 6%;
+  border-top: 1px solid #999; 
 }
 
 .footer-icon i, .tab {
   margin: 0 10px;
+  display: inline-block;
+}
+
+.tab {
+  border: 1px solid #999;
+  border-top: none;
+  padding: 15px 20px; 
+  position: absolute;
+  bottom: 10px;
+  background: #f3f3f3;
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+
 
 /* Cell selection formatting  */
 
-.selected-cell{
+.selected-cell  {
   background-color: #def;
 }
 
