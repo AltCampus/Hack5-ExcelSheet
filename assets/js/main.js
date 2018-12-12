@@ -1,7 +1,5 @@
-var MainData = {};
+var MainData = JSON.parse(localStorage.getItem('excel')) || {};
 displayCells();
-
-
 
 //Displaying The cells Grid
 function displayCells() {
@@ -38,6 +36,7 @@ function addListner() {
 				MainData[e.target.id].precedence = [];
 				e.target.value = "";
 			}
+			localStorage.setItem('excel', JSON.stringify(MainData));
 		};
 		elm.onblur = function (e) {
 			valueFromCell = e.target.value;
@@ -47,8 +46,9 @@ function addListner() {
 			} else {
 				MainData[e.target.id].formula = "";
 				MainData[e.target.id].value = valueFromCell;
-				reCalPresedence(e.target.id);
 			}
+			reCalPresedence(e.target.id);
+			localStorage.setItem('excel', JSON.stringify(MainData));
 		};
 	});
 }
@@ -63,7 +63,6 @@ function computeAll(id) {
 		m = re.exec(formula);
 		mArray.push(m);
 	} while (m);
-	console.log(mArray);
 	evaluateAndPrecedence(formula, mArray, id)
 }
 
@@ -85,7 +84,6 @@ function evaluateAndPrecedence(str, arrVar, id) {
 		}
 		else newStr += str[i];
 	}
-	console.log("hello",newStr);
 	
 	if (isNaN(newStr)) {
 		value = calculate(newStr);
@@ -110,7 +108,7 @@ function calculate(input) {
 		exp: '^'
 	};
 
-	f.ooo = [
+	f.obj = [
 		[
 			[f.mlt],
 			[f.div],
@@ -122,13 +120,13 @@ function calculate(input) {
 			[f.sub]
 		]
 	];
-
+	//remove Unnecessory
 	input = input.replace(/[^0-9%^*\/()\-+.]/g, '');
 
 	var output;
-	for (var i = 0, n = f.ooo.length; i < n; i++) {
+	for (var i = 0, n = f.obj.length; i < n; i++) {
 
-		var re = new RegExp('(\\d+\\.?\\d*)([\\' + f.ooo[i].join('\\') + '])(\\d+\\.?\\d*)');
+		var re = new RegExp('(\\d+\\.?\\d*)([\\' + f.obj[i].join('\\') + '])(\\d+\\.?\\d*)');
 		re.lastIndex = 0;
 
 		while (re.test(input)) {
