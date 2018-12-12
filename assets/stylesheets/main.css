@@ -398,4 +398,25 @@ input:focus {
 
 .footer-icon i, .tab {
   margin: 0 10px;
+
+/* Cell selection formatting  */
+
+.selected-cell{
+  background-color: #def;
+}
+
+.bold-text{
+  font-weight: 600;
+}
+
+.italic-text{
+  font-style: italic;
+}
+
+.strike-through-text{
+  text-decoration: line-through;
+}
+
+.underline-text{
+  text-decoration: underline;
 }
